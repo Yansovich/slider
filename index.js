@@ -26,7 +26,15 @@ function setWidthLine() {
 window.addEventListener('reseze', setWidthLine)
 setWidthLine()
 
-nextBtn.addEventListener('click', function() {
+function switchForward() {
+    orderImg++
+    if(orderImg > images.length - 1) {
+        orderImg = 0
+    }
+}
+
+
+nextBtn.addEventListener('click', function switchForward() {
     orderImg++
     if(orderImg > images.length - 1) {
         orderImg = 0
@@ -35,7 +43,7 @@ nextBtn.addEventListener('click', function() {
 })
 
 
-prevBtn.addEventListener('click', function() {
+prevBtn.addEventListener('click', function switchBack() {
     orderImg--
     if(orderImg < 0) {
         orderImg = images.length - 1
@@ -47,4 +55,22 @@ function scrollSlider() {
     const value = orderImg * width
     sliderLine.style.transform = `translate(-${value}px)`
 }
+
+const arrDots = Array.from(dots)
+// console.log(arrDots);
+
+arrDots.forEach((e) => {
+    
+    e.addEventListener('click', function () {
+        orderImg++
+        if(orderImg > images.length - 1) {
+        orderImg = 0
+        }
+        scrollSlider()
+    })
+})   
+
+
+
+
 
