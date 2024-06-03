@@ -25,6 +25,7 @@ function setWidthLine() {
 
 window.addEventListener('reseze', setWidthLine)
 setWidthLine()
+setActiveStyle()
 
 function switchForward() {
     orderImg++
@@ -40,6 +41,7 @@ nextBtn.addEventListener('click', function switchForward() {
         orderImg = 0
     }
     scrollSlider()
+    setActiveStyle()
 })
 
 
@@ -49,6 +51,7 @@ prevBtn.addEventListener('click', function switchBack() {
         orderImg = images.length - 1
     }
     scrollSlider()
+    setActiveStyle()
 })
 
 function scrollSlider() {
@@ -56,20 +59,31 @@ function scrollSlider() {
     sliderLine.style.transform = `translate(-${value}px)`
 }
 
-const arrDots = Array.from(dots)
-// console.log(arrDots);
+function setActiveStyle () {
+    dots[orderImg].classList.add(`activePoint`)
+}
 
-arrDots.forEach((e) => {
-    
-    e.addEventListener('click', function () {
-        orderImg++
-        if(orderImg > images.length - 1) {
-        orderImg = 0
-        }
+function removeActiveStyle () {
+    dots[orderImg].classList.remove(`activePoint`)
+}
+
+
+// for (let i = 0; i < dots.length; i++) {
+//     dots[i].addEventListener ('click', () => {
+//         orderImg = i;
+//         scrollSlider()
+//         setActiveStyle()
+//     })
+// }
+
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+        removeActiveStyle()
+        orderImg = i;
         scrollSlider()
+        setActiveStyle()
     })
-})   
-
+})
 
 
 
